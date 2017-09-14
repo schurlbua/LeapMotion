@@ -1,3 +1,7 @@
+# Customization
+*.meta
+*.csproj
+
 # Prerequisites
 *.d
 
