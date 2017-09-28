@@ -31,6 +31,7 @@ public class ButtonManager : MonoBehaviour {
 	protected bool activated = false;
 
 	protected Vector3 startPosition;
+	protected Vector3 previousPosition;
 
 
 	/***********
@@ -43,6 +44,7 @@ public class ButtonManager : MonoBehaviour {
 
 		// Remember start position of button
 		startPosition = transform.localPosition;
+		previousPosition = transform.localPosition;
 	}
 	
 	// Update is called once per frame
@@ -52,7 +54,23 @@ public class ButtonManager : MonoBehaviour {
 
 		released = false;
 
+		if (transform.position.z > -0.000001f)
+			moveButton ();
+		else
+			transform.localPosition = startPosition;
+
+		if (activated) {
+			activated = false;
+			Activation ();
+		}
+
+		previousPosition = transform.localPosition;
+	}
+
+	private void moveButton()
+	{
 		// Use local position instead of global, so button can be rotated in any direction
+		// Lock disabled axis
 		Vector3 localPos = transform.localPosition;
 		if (lockX) localPos.x = startPosition.x;
 		if (lockY) localPos.y = startPosition.y;
@@ -68,29 +86,29 @@ public class ButtonManager : MonoBehaviour {
 		if (!lockX) distance = Math.Abs(allDistances.x);
 		else if (!lockY) distance = Math.Abs(allDistances.y);
 		else if (!lockZ) distance = Math.Abs(allDistances.z);
-		float pressCompletion = Mathf.Clamp(1 / activationDistance * distance, 0f, 1f);
 
-		//Activate pressed button
+		/*if (distance >= activationDistance) {
+			transform.position = previousPosition;
+		}*/
+
+		float pressCompletion = 1.0f - ((activationDistance - distance) / activationDistance);
+
+		// button pressed
 		if (pressCompletion >= 0.7f && !pressed)
 		{
 			pressed = true;
+			activated = true;
 			//Change color of object to activation color
 			StartCoroutine(ChangeButtonColor(gameObject, inactiveColor, activeColor, 0.2f));
 		}
 
-		//Dectivate unpressed button
+		// button unpressed
 		else if (pressCompletion <= 0.2f && pressed)
 		{
 			pressed = false;
 			released = true;
-			activated = true;
 			//Change color of object back to normal
 			StartCoroutine(ChangeButtonColor(gameObject, activeColor, inactiveColor, 0.3f));
-		}
-
-		if (activated) {
-			activated = false;
-			Activation ();
 		}
 	}
 
