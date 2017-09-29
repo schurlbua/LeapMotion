@@ -24,15 +24,11 @@ public class ButtonManager : MonoBehaviour {
 	public Color inactiveColor;
 	public Color activeColor;
 
-	protected Controller controller;
-
 	protected bool pressed = false;
 	protected bool released = false;
 	protected bool activated = false;
 
 	protected Vector3 startPosition;
-	protected Vector3 previousPosition;
-
 
 	/***********
 	 * Methods *
@@ -40,17 +36,15 @@ public class ButtonManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		controller = new Controller ();
 
 		// Remember start position of button
 		startPosition = transform.localPosition;
-		previousPosition = transform.localPosition;
+
+		gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Frame frame = controller.Frame();
-		HandList handsInFrame = frame.Hands;
 
 		released = false;
 
@@ -63,8 +57,6 @@ public class ButtonManager : MonoBehaviour {
 			activated = false;
 			Activation ();
 		}
-
-		previousPosition = transform.localPosition;
 	}
 
 	private void moveButton()
@@ -86,10 +78,6 @@ public class ButtonManager : MonoBehaviour {
 		if (!lockX) distance = Math.Abs(allDistances.x);
 		else if (!lockY) distance = Math.Abs(allDistances.y);
 		else if (!lockZ) distance = Math.Abs(allDistances.z);
-
-		/*if (distance >= activationDistance) {
-			transform.position = previousPosition;
-		}*/
 
 		float pressCompletion = 1.0f - ((activationDistance - distance) / activationDistance);
 
