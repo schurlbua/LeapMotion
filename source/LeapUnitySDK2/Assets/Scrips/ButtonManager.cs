@@ -25,7 +25,6 @@ public class ButtonManager : MonoBehaviour {
 	public Color activeColor;
 
 	protected bool pressed = false;
-	protected bool released = false;
 	protected bool activated = false;
 
 	protected Vector3 startPosition;
@@ -46,13 +45,17 @@ public class ButtonManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		released = false;
+		float initPos = 0.0f;
+		if (!lockX) initPos = startPosition.x;
+		else if (!lockY) initPos = startPosition.y;
+		else if (!lockZ) initPos = startPosition.z;
+		float offset = (activationDistance - initPos) * 0.2f;
 
-		if (transform.position.z > -0.000001f)
+		if (transform.localPosition.z > offset)
 			moveButton ();
 		else
 			transform.localPosition = startPosition;
-
+		
 		if (activated) {
 			activated = false;
 			Activation ();
@@ -69,17 +72,16 @@ public class ButtonManager : MonoBehaviour {
 		if (lockZ) localPos.z = startPosition.z;
 		transform.localPosition = localPos;
 
-		// Return button to startPosition
-		transform.localPosition = Vector3.Lerp(transform.localPosition, startPosition, Time.deltaTime * returnSpeed);
-
 		//Get distance of button press. Make sure to only have one moving axis.
-		Vector3 allDistances = transform.localPosition - startPosition;
-		float distance = 1.0f;
-		if (!lockX) distance = Math.Abs(allDistances.x);
-		else if (!lockY) distance = Math.Abs(allDistances.y);
-		else if (!lockZ) distance = Math.Abs(allDistances.z);
+		float distance = GetDistance ();
+
+		// Return button to startPosition
+		transform.localPosition = Vector3.Lerp (transform.localPosition, startPosition, Time.deltaTime * returnSpeed);
 
 		float pressCompletion = 1.0f - ((activationDistance - distance) / activationDistance);
+		//Debug.Log ("LocalPosition : " + transform.localPosition);
+		//Debug.Log ("distance : " + distance);
+		Debug.Log ("PressCompletion : " + pressCompletion);
 
 		// button pressed
 		if (pressCompletion >= 0.7f && !pressed)
@@ -91,10 +93,9 @@ public class ButtonManager : MonoBehaviour {
 		}
 
 		// button unpressed
-		else if (pressCompletion <= 0.2f && pressed)
+		else if (pressCompletion <= 0.30f && pressed)
 		{
 			pressed = false;
-			released = true;
 			//Change color of object back to normal
 			StartCoroutine(ChangeButtonColor(gameObject, activeColor, inactiveColor, 0.3f));
 		}
@@ -113,6 +114,16 @@ public class ButtonManager : MonoBehaviour {
 			yield return null;
 		}
 
+	}
+
+	private float GetDistance() {
+		Vector3 allDistances = transform.localPosition - startPosition;
+		float dist = 1.0f;
+		if (!lockX) dist = Math.Abs(allDistances.x);
+		else if (!lockY) dist = Math.Abs(allDistances.y);
+		else if (!lockZ) dist = Math.Abs(allDistances.z);
+
+		return dist;
 	}
 
 	void Activation() {

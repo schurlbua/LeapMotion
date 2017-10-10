@@ -9,4 +9,7 @@ public class Loader : MonoBehaviour {
 		Singleton.Instance.UIMgr = new UIManager ();
 	}
 
+	void Update () {
+		Singleton.Instance.UIMgr.Update ();
+	}
 }
