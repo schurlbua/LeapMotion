@@ -7,6 +7,7 @@ using Leap;
 public class Hand_collision : MonoBehaviour {
 	Controller controller;
 	public HandController handCtrl;
+	public bool trigger;
 
 
 	// Use this for initialization
@@ -31,65 +32,28 @@ public class Hand_collision : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) 
 	{
-		Frame frame = controller.Frame (); 
-		Hand hand = frame.Hands.Frontmost;
+		
 		if (IsHand (other)) 
 		{
-			Debug.Log ("Yay! A hand collided!");
-			//GetComponent<Renderer> ().material.color = Color.yellow;
-			//transform.position = handCtrl.transform.TransformPoint(hand.PalmPosition.ToUnityScaled()); //translation
-			transform.rotation = handCtrl.transform.rotation * hand.Basis.Rotation (false); //rotation
-
-			/*Renderer[] renders = GetComponentsInChildren<Renderer> ();
-			foreach (Renderer render in renders) 
-			{
-				Color new_color = render.material.color;
-				new_color.g = 255;
-				render.material.color = new_color;
-			}*/
-				
-		} 
-
-
-		    
+			trigger = true;
+		}   
 	}  
 
-
-	/*
-	// Update is called once per frame
-	void Update (Collider other) {
-		bool colide = false;
-		Hand leap_hand = GetComponent<HandModel>().GetLeapHand();
-		float confidence = leap_hand.Confidence;
-
-		if (other.transform.parent && other.transform.parent.parent && other.transform.parent.parent.GetComponent<HandModel> ()) {
-			colide = true;
-		} 
-		else 
+	void OnTriggerExit(Collider other)
+	{
+		if (IsHand (other)) 
 		{
-			colide = false;
-		}
-		if (colide == true) 
-		{
-			Renderer[] renders = GetComponentsInChildren<Renderer> ();
-			foreach (Renderer render in renders) 
-			{
-				Color new_color = render.material.color;
-				new_color.a = 0;
-				new_color.r = 153;
-				render.material.color = new_color;
-			}
+			trigger = false;
 		}
 	}
 
+	void Update(){
+		Frame frame = controller.Frame (); 
+		Hand hand = frame.Hands.Frontmost;
 
-	
+		if(trigger==true)
+		transform.rotation = handCtrl.transform.rotation * hand.Basis.Rotation (false); //rotation
+	}
 
-	protected void SetRendererAlpha(Renderer render, float alpha) 
-	{
-		Color new_color = render.material.color;
-		new_color.a = 0;
-		render.material.color = new_color;
-	}*/
 }
 
