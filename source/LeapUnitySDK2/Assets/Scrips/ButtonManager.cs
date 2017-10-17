@@ -26,6 +26,7 @@ public class ButtonManager : MonoBehaviour {
 
 	protected bool pressed = false;
 	protected bool activated = false;
+	public bool fading = false;
 
 	protected Vector3 startPosition;
 
@@ -79,9 +80,6 @@ public class ButtonManager : MonoBehaviour {
 		transform.localPosition = Vector3.Lerp (transform.localPosition, startPosition, Time.deltaTime * returnSpeed);
 
 		float pressCompletion = 1.0f - ((activationDistance - distance) / activationDistance);
-		//Debug.Log ("LocalPosition : " + transform.localPosition);
-		//Debug.Log ("distance : " + distance);
-		Debug.Log ("PressCompletion : " + pressCompletion);
 
 		// button pressed
 		if (pressCompletion >= 0.7f && !pressed)
@@ -101,8 +99,7 @@ public class ButtonManager : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator ChangeButtonColor(GameObject obj, Color from, Color to, float duration)
-	{
+	private IEnumerator ChangeButtonColor(GameObject obj, Color from, Color to, float duration) {
 		float timeElapsed = 0.0f;
 		float t = 0.0f;
 
@@ -113,9 +110,34 @@ public class ButtonManager : MonoBehaviour {
 			obj.GetComponent<Renderer>().material.color = Color.Lerp(from, to, t);
 			yield return null;
 		}
-
 	}
 
+	// the button fades away and deactivates itself
+	private IEnumerator FadeAway(GameObject obj, float duration) {
+		fading = true;
+
+		float timeElapsed = 0.0f;
+		float t = 0.0f;
+
+		while (t < 1.0f)
+		{
+			timeElapsed += Time.deltaTime;
+			t = timeElapsed / duration;
+
+			Color colorAlpha = obj.GetComponent<Renderer> ().material.color;
+			colorAlpha.a = Mathf.Lerp (1.0f, 0.0f, t);
+			obj.GetComponent<Renderer>().material.color = colorAlpha;
+			yield return null;
+		}
+
+		// For the fade away function, deactivates game object when transparent
+		if (gameObject.GetComponent<Renderer> ().material.color.a < 0.05f) {
+			fading = false;
+			gameObject.SetActive (false);
+		}
+	}
+
+	// to get the distance between the button and it's start position
 	private float GetDistance() {
 		Vector3 allDistances = transform.localPosition - startPosition;
 		float dist = 1.0f;
@@ -126,6 +148,7 @@ public class ButtonManager : MonoBehaviour {
 		return dist;
 	}
 
+	// action of the button when pressed
 	void Activation() {
 		float r, g, b;
 		r = UnityEngine.Random.Range (0.0f, 1.0f);
@@ -133,5 +156,12 @@ public class ButtonManager : MonoBehaviour {
 		b = UnityEngine.Random.Range (0.0f, 1.0f);
 
 		cube.GetComponent<Renderer> ().material.color = new Color(r, g, b);
+	}
+
+	// the button disappears : fades away
+	public void Deactivation() {
+		if (fading == false) {
+			StartCoroutine (FadeAway (gameObject, 0.5f));
+		}
 	}
 }
