@@ -30,30 +30,19 @@ public class Hand_collision : MonoBehaviour {
 			return false;
 	}
 
-	void OnTriggerEnter(Collider other) 
+	void OnTriggerStay(Collider other) 
 	{
 		
 		if (IsHand (other)) 
 		{
-			trigger = true;
+			Frame frame = controller.Frame (); 
+			Hand hand = frame.Hands.Frontmost;
+
+			transform.rotation = handCtrl.transform.rotation * hand.Basis.Rotation (false); //rotation
 		}   
 	}  
 
-	void OnTriggerExit(Collider other)
-	{
-		if (IsHand (other)) 
-		{
-			trigger = false;
-		}
-	}
 
-	void Update(){
-		Frame frame = controller.Frame (); 
-		Hand hand = frame.Hands.Frontmost;
-
-		if(trigger==true)
-		transform.rotation = handCtrl.transform.rotation * hand.Basis.Rotation (false); //rotation
-	}
 
 }
 
