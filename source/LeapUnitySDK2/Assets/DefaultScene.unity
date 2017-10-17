@@ -157,6 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 176696291}
   - component: {fileID: 176696290}
+  - component: {fileID: 176696292}
   m_Layer: 0
   m_Name: MyButton
   m_TagString: Button
@@ -171,11 +172,11 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 176696289}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.06, y: 1.49, z: 52.91}
-  m_Center: {x: 0.51, y: 0, z: -26.27}
+  m_Size: {x: 2.06, y: 1.49, z: 64.8}
+  m_Center: {x: 0.51, y: 0, z: -16.62}
 --- !u!4 &176696291
 Transform:
   m_ObjectHideFlags: 0
@@ -184,12 +185,23 @@ Transform:
   m_GameObject: {fileID: 176696289}
   m_LocalRotation: {x: 0, y: 0.08759041, z: 0, w: 0.9961566}
   m_LocalPosition: {x: 6.5, y: 0, z: 0.5}
-  m_LocalScale: {x: 3, y: 2.2, z: 0.3}
+  m_LocalScale: {x: 2, y: 2.2, z: 0.3}
   m_Children:
   - {fileID: 1766352414}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 10.05, z: 0}
+--- !u!114 &176696292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 176696289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d31cd84ebd8a4d758273f592cba4031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &255184115
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +304,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -6.75
+      value: -6.9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: m_LocalPosition.z
@@ -615,6 +627,7 @@ MonoBehaviour:
   activationDistance: 4
   inactiveColor: {r: 0.9485294, g: 0.927606, b: 0.927606, a: 0}
   activeColor: {r: 0.5588235, g: 0.27091038, b: 0.23010379, a: 0}
+  fading: 0
 --- !u!54 &1766352410
 Rigidbody:
   m_ObjectHideFlags: 0
