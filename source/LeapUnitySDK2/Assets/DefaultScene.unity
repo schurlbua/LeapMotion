@@ -199,7 +199,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 176696289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d31cd84ebd8a4d758273f592cba4031, type: 3}
+  m_Script: {fileID: 11500000, guid: f48a0426d18fa463f93ab01b386adcd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &255184115
@@ -359,6 +359,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &514453109 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171,
+    type: 2}
+  m_PrefabInternal: {fileID: 514453108}
+  m_Script: {fileID: 11500000, guid: 2c4e0350c46ae405b8db39262c18b8f5, type: 3}
 --- !u!1 &594404218
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +441,8 @@ GameObject:
   - component: {fileID: 779051023}
   - component: {fileID: 779051022}
   - component: {fileID: 779051021}
+  - component: {fileID: 779051025}
+  - component: {fileID: 779051026}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -481,7 +489,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 779051020}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -506,6 +514,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -10.9, y: -17.32, z: 0}
+--- !u!114 &779051025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 779051020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f142c4dd1a2c4315823ba6966d6977f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCtrl: {fileID: 514453109}
+--- !u!114 &779051026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 779051020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbee36705ff1b400885ac2d823a59bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCtrl: {fileID: 514453109}
 --- !u!1 &1116574458
 GameObject:
   m_ObjectHideFlags: 0

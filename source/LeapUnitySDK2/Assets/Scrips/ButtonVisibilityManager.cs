@@ -24,7 +24,6 @@ public class ButtonVisibilityManager : MonoBehaviour {
 
 	void OnTriggerExit(Collider otherCollider) {
 		if (otherCollider.transform.parent.name == "middle" && otherCollider.gameObject.name == "bone1" && movingButton.activeInHierarchy) {
-			Debug.Log ("deactivation");
 			movingButton.GetComponent<ButtonManager> ().Deactivation ();
 		}
 	}
