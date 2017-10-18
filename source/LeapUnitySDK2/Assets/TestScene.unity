@@ -197,6 +197,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &279068226 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171,
+    type: 2}
+  m_PrefabInternal: {fileID: 445946362}
+  m_Script: {fileID: 11500000, guid: 2c4e0350c46ae405b8db39262c18b8f5, type: 3}
 --- !u!1001 &445946362
 Prefab:
   m_ObjectHideFlags: 0
@@ -286,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575f23d463419409b8133e29dd6a3cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handCtrl: {fileID: 0}
+  handCtrl: {fileID: 279068226}
 --- !u!23 &873585926
 MeshRenderer:
   m_ObjectHideFlags: 0
