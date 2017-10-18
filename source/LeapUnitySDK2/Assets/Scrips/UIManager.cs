@@ -27,7 +27,7 @@ public class UIManager {
 
 	// Update is called once per frame
 	public void Update () {
-		Frame frame = controller.Frame();
+		/*Frame frame = controller.Frame();
 		HandList handsInFrame = frame.Hands;
 
 		foreach (Hand hand in handsInFrame) {
@@ -36,9 +36,11 @@ public class UIManager {
 				foreach (GameObject button in buttonList) {
 					if (button.GetComponent<Collider> ().bounds.Contains (handPos)) {
 						button.transform.Find ("MovingButton").gameObject.SetActive (true);
+					} else if (button.transform.Find ("MovingButton").gameObject.activeInHierarchy) {
+						button.transform.Find ("MovingButton").gameObject.GetComponent<ButtonManager> ().Deactivation ();
 					}
 				}
 			}
-		}
+		}*/
 	}
 }
