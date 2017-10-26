@@ -363,12 +363,12 @@ Prefab:
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: rightPhysicsModel
       value: 
-      objectReference: {fileID: 11460542, guid: b40ae722308c7440eacf1eb7476bae3d,
+      objectReference: {fileID: 11460542, guid: 771ccef22439b4ff49c0eca79b8a9563,
         type: 2}
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: leftPhysicsModel
       value: 
-      objectReference: {fileID: 11460542, guid: e6df00e537b144b5eb81a09d4ba6639a,
+      objectReference: {fileID: 11460542, guid: b10ecc4ea327d4cadbb65a2a50ca040b,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
