@@ -7,7 +7,12 @@ public class Translation : MonoBehaviour {
 
 	Controller controller;
 	bool trigger_inside = false;
+	bool trigger_insideL = false;
+	bool trigger_insideR = false;
 	public HandController handCtrl;
+	float oldZoomdistance;
+	public bool isLeftFirst = false;
+	public bool isLeftSecond = false;
 
 	void Start ()	{
 		controller = new Controller ();
@@ -26,6 +31,9 @@ public class Translation : MonoBehaviour {
 		Hand secondHand = handsInFrame [1];
 		Vector3 thumb_tip1 = firstHand.Fingers [0].TipPosition.ToUnityScaled ();
 		Vector3 thumb_tip2 = secondHand.Fingers [0].TipPosition.ToUnityScaled ();
+		isLeftFirst = firstHand.IsLeft ? true : false;
+		isLeftSecond = secondHand.IsLeft ? true : false;
+		//Debug.Log(isLeftSecond);
 
 		// checking if hands pinch
 
@@ -56,23 +64,32 @@ public class Translation : MonoBehaviour {
 		if (handsInFrame.Count > 0) {
 			if (finger != Finger.Invalid) {
 				//zoomfunction - not working yet
-				if (handsInFrame.Count == 2 && trigger_inside && trigger_pinch1 && trigger_pinch2) {
-					Vector3 distance3 = thumb_tip1 - thumb_tip2;
-					float zoomdistance = 0;
-					for(int i = 0; i<3; i++){
-						if (distance3[i]>0 && distance3[i]>zoomdistance){
-							zoomdistance = distance3[i];
-						}
+				if (handsInFrame.Count == 2 && trigger_insideR && trigger_insideL && trigger_pinch1 && trigger_pinch2) {
+					//Vector3 distance3 = thumb_tip1 - thumb_tip2;
+					float distance3 = Vector3.Distance(thumb_tip1,thumb_tip2)*50;
+
+					if(oldZoomdistance == distance3) {
+						zooming = false;
+					} else if (oldZoomdistance >= distance3) {
+						zooming = true;
+						transform.localScale = Vector3.one * distance3;
+					} else if (oldZoomdistance <= distance3) {
+						zooming = true;
+						transform.localScale = Vector3.one * distance3;
 					}
-					//Debug.Log(zoomdistance);
-					zooming = true;
-					//transform.localScale += distance3;
+
+					oldZoomdistance = distance3;
+
+					 //Vector3 test = Camera.main.ScreenToWorldPoint(thumb_tip2);
+					//transform.localScale +=  new Vector3(zoomdistance,zoomdistance,zoomdistance);
 				}
 				// translation function -  if hand is inside and pinched -> you can move the object
 				else if ((trigger_pinch1 || trigger_pinch2) && trigger_inside && !zooming) {
 					transform.position = handCtrl.transform.TransformPoint (hand.Fingers [0].TipPosition.ToUnityScaled ()); //translation
 				} else {
 					trigger_inside = false;
+					trigger_insideL = false;
+					trigger_insideR = false;
 				}
 			}
 		}
@@ -80,8 +97,23 @@ public class Translation : MonoBehaviour {
 
 	// checking if hands are colliding with the object
 
-	void OnTriggerEnter (Collider other)
-	{
+	void OnTriggerStay (Collider other) {
+
+		if(other.transform.parent.root.name == "RigidRoundHandLeft(Clone)"){
+			trigger_insideL = true;
+		} else if (other.transform.parent.root.name == "RigidRoundHandRight(Clone)"){
+			trigger_insideR = true;
+		}
+
+		//Debug.Log(other.transform.parent.root);
+
 		trigger_inside = true;
+
+
+	}
+
+	void OnTriggerExit (Collider other) {
+		trigger_insideL = false;
+		trigger_insideR = false;
 	}
 }
