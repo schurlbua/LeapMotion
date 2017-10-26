@@ -57,7 +57,7 @@ dkms.conf
 source/LeapUnitySDK2/Library/
 source/LeapUnitySDK2/Assets/Plugins/
 source/LeapUnitySDK2/Assets/LeapMotion+OVR/
-source/LeapUnitySDK2/Assets/LeapMotion/
+#source/LeapUnitySDK2/Assets/LeapMotion/
 source/LeapUnitySDK2/ProjectSettings/
 source/LeapUnitySDK2/Assets/Gizmos/
 source/LeapUnitySDK2/Assets/OVR/
