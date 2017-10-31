@@ -4,7 +4,7 @@ using UnityEngine;
 using Leap;
 
 
-public class Rotation : MonoBehaviour {
+public class Rotation : Gesture {
 
 	Controller controller;
 	public HandController handCtrl;
@@ -32,6 +32,12 @@ public class Rotation : MonoBehaviour {
 			Hand hand = frame.Hands.Frontmost;
 
 			transform.rotation = handCtrl.transform.rotation * hand.Basis.Rotation (false); //rotation
-		}   
+			Activated = true;
+		}
+	}
+
+	void OnTriggerExit(Collider other)
+	{
+		Activated = false;
 	}
 }

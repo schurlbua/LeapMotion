@@ -12,6 +12,8 @@ public class Singleton {
 
 	public UIManager UIMgr;
 
+	private List<Gesture> gestureList;
+
 	/***********
 	 * Methods *
 	************/
@@ -28,5 +30,18 @@ public class Singleton {
 			}
 			return instance;
 		}
+	}
+
+	public void InitGestureList() {
+		gestureList = new List<Gesture> ();
+
+		Gesture rotation = GameObject.FindGameObjectWithTag ("Organ").GetComponent<Rotation> ();
+		Gesture translation = GameObject.FindGameObjectWithTag ("Organ").GetComponent<Translation> ();
+		gestureList.Add (rotation);
+		gestureList.Add (translation);
+	}
+
+	public List<Gesture> GetGestureList() {
+		return gestureList;
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leap;
 
-public class Translation : MonoBehaviour {
+public class Translation : Gesture {
 
 	Controller controller;
 	bool trigger_inside = false;
