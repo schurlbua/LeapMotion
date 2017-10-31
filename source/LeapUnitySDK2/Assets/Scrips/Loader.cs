@@ -6,10 +6,8 @@ public class Loader : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		Singleton.Instance.UIMgr = new UIManager ();
-	}
-
-	void Update () {
-		Singleton.Instance.UIMgr.Update ();
+		Singleton.Instance.InitGestureList ();
+		gameObject.AddComponent<UIManager> ();
+		Singleton.Instance.UIMgr = gameObject.GetComponent<UIManager>();
 	}
 }
