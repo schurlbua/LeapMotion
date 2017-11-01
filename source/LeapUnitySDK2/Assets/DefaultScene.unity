@@ -607,6 +607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c330af02858e433ba193e809178e011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: ac9b71367d8044863bc3797a6952eed3, type: 3}
+  Activated: 0
   handCtrl: {fileID: 514453109}
 --- !u!114 &779051026
 MonoBehaviour:
@@ -619,6 +621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 461f5392343f04369b8fa8b4bacd61cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: c8a611ea264834d859b2c5b16dc6650f, type: 3}
+  Activated: 0
   handCtrl: {fileID: 514453109}
   isLeftFirst: 0
   isLeftSecond: 0
