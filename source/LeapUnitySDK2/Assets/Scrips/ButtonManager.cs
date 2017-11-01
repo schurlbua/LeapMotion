@@ -12,7 +12,7 @@ public class ButtonManager : MonoBehaviour {
 	 * Attributes *
 	***************/
 
-	public GameObject cube;
+	public GameObject organ;
 
 	public bool lockX;
 	public bool lockY;
@@ -28,6 +28,10 @@ public class ButtonManager : MonoBehaviour {
 	protected bool activated = false;
 	public bool fading = false;
 
+	protected Vector3 initialOrganPosition;
+	protected Quaternion initialOrganRotation;
+	protected Vector3 initialOrganLocalScale;
+
 	protected Vector3 startPosition;
 
 	/***********
@@ -37,7 +41,11 @@ public class ButtonManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		// Remember start position of button
+		// Remember initial transform / position of button
+		initialOrganPosition = organ.transform.position;
+		initialOrganRotation = organ.transform.rotation;
+		initialOrganLocalScale = organ.transform.localScale;
+
 		startPosition = transform.localPosition;
 
 		gameObject.SetActive (false);
@@ -63,7 +71,7 @@ public class ButtonManager : MonoBehaviour {
 		}
 	}
 
-	private void moveButton()
+	protected void moveButton()
 	{
 		// Use local position instead of global, so button can be rotated in any direction
 		// Lock disabled axis
@@ -99,7 +107,7 @@ public class ButtonManager : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator ChangeButtonColor(GameObject obj, Color from, Color to, float duration) {
+	protected IEnumerator ChangeButtonColor(GameObject obj, Color from, Color to, float duration) {
 		float timeElapsed = 0.0f;
 		float t = 0.0f;
 
@@ -113,7 +121,7 @@ public class ButtonManager : MonoBehaviour {
 	}
 
 	// the button fades away and deactivates itself
-	private IEnumerator FadeAway(GameObject obj, float duration) {
+	protected IEnumerator FadeAway(GameObject obj, float duration) {
 		fading = true;
 
 		float timeElapsed = 0.0f;
@@ -138,7 +146,7 @@ public class ButtonManager : MonoBehaviour {
 	}
 
 	// to get the distance between the button and it's start position
-	private float GetDistance() {
+	protected float GetDistance() {
 		Vector3 allDistances = transform.localPosition - startPosition;
 		float dist = 1.0f;
 		if (!lockX) dist = Math.Abs(allDistances.x);
@@ -148,14 +156,14 @@ public class ButtonManager : MonoBehaviour {
 		return dist;
 	}
 
-	// action of the button when pressed
-	void Activation() {
+	// action of the button when pressed, for the ButtonManager it is change color
+	public virtual void Activation() {
 		float r, g, b;
 		r = UnityEngine.Random.Range (0.0f, 1.0f);
 		g = UnityEngine.Random.Range (0.0f, 1.0f);
 		b = UnityEngine.Random.Range (0.0f, 1.0f);
 
-		cube.GetComponent<Renderer> ().material.color = new Color(r, g, b);
+		organ.GetComponent<Renderer> ().material.color = new Color(r, g, b);
 	}
 
 	// the button disappears : fades away
