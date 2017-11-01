@@ -12,8 +12,6 @@ public class ButtonManager : MonoBehaviour {
 	 * Attributes *
 	***************/
 
-	public GameObject organ;
-
 	public bool lockX;
 	public bool lockY;
 	public bool lockZ;
@@ -28,10 +26,6 @@ public class ButtonManager : MonoBehaviour {
 	protected bool activated = false;
 	public bool fading = false;
 
-	protected Vector3 initialOrganPosition;
-	protected Quaternion initialOrganRotation;
-	protected Vector3 initialOrganLocalScale;
-
 	protected Vector3 startPosition;
 
 	/***********
@@ -41,11 +35,7 @@ public class ButtonManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		// Remember initial transform / position of button
-		initialOrganPosition = organ.transform.position;
-		initialOrganRotation = organ.transform.rotation;
-		initialOrganLocalScale = organ.transform.localScale;
-
+		// Remember start position of button
 		startPosition = transform.localPosition;
 
 		gameObject.SetActive (false);
@@ -163,7 +153,7 @@ public class ButtonManager : MonoBehaviour {
 		g = UnityEngine.Random.Range (0.0f, 1.0f);
 		b = UnityEngine.Random.Range (0.0f, 1.0f);
 
-		organ.GetComponent<Renderer> ().material.color = new Color(r, g, b);
+		Singleton.Instance.Organ.GetComponent<Renderer> ().material.color = new Color(r, g, b);
 	}
 
 	// the button disappears : fades away
