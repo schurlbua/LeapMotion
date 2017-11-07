@@ -468,7 +468,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 594404218}
   m_LocalRotation: {x: 0.07461929, y: 0.01740378, z: -0.0013024878, w: 0.9970594}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -27.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -767,11 +767,11 @@ MeshCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 962591564}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
+  m_Convex: 1
+  m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f64447a673bb14e6cb5938c47021ba19, type: 3}
 --- !u!65 &962591569
@@ -782,7 +782,7 @@ BoxCollider:
   m_GameObject: {fileID: 962591564}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 219.2, y: 193.6, z: 125}
   m_Center: {x: -32.18, y: 28.9, z: 134.07}
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   returnSpeed: 7
   activationDistance: 4
   inactiveColor: {r: 0.9490196, g: 0.92941177, b: 0.92941177, a: 0}
-  activeColor: {r: 0.5568628, g: 0.27058825, b: 0.23137255, a: 0}
+  activeColor: {r: 0.23137252, g: 0.2470858, b: 0.5568628, a: 0}
   fading: 0
 --- !u!54 &1766352410
 Rigidbody:
