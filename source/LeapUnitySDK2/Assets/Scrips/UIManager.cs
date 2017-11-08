@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +25,17 @@ public class UIManager : MonoBehaviour {
 				gestureImage.enabled = true;
 				gestureImage.sprite = gesture.Icon;
 				imageEnabled = true;
+
+				// making sure translating icon gets selected if translating and rotating at the same time.
+				if(gesture.GetType().Equals(typeof(Rotation))){
+					foreach (Gesture otherGesture in Singleton.Instance.GetGestureList()) {
+						if(otherGesture.GetType().Equals(typeof(Translation))&& otherGesture.Activated){
+							gestureImage.sprite = otherGesture.Icon;
+							break;
+						}
+					}
+				}
+
 				break;
 			}
 		}

@@ -28,7 +28,7 @@ public class Singleton {
 
 	public static Singleton Instance
 	{
-		get 
+		get
 		{
 			if (instance == null)
 			{
@@ -59,8 +59,10 @@ public class Singleton {
 	public void InitGestureList() {
 		gestureList = new List<Gesture> ();
 
+		Gesture zoom = Organ.GetComponent<Zoom> ();
 		Gesture rotation = Organ.GetComponent<Rotation> ();
 		Gesture translation = Organ.GetComponent<Translation> ();
+		gestureList.Add (zoom);
 		gestureList.Add (rotation);
 		gestureList.Add (translation);
 	}
